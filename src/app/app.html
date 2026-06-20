@@ -1,0 +1,91 @@
+<div class="app-container" [class.dark-theme]="isDarkMode">
+
+  <div class="header">
+   
+    <button class="theme-btn" (click)="toggleTheme()">
+      {{ isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode' }}
+    </button>
+  </div>
+<div class="container">
+
+  <h1>GST & EMI Calculator</h1>
+
+  <div class="grid">
+
+    <!-- GST -->
+    <div class="card">
+
+      <h2>GST Calculator</h2>
+
+      <label>Amount</label>
+      <input
+        type="number"
+        [(ngModel)]="amount"
+        placeholder="Enter Amount">
+
+      <label>GST %</label>
+      <input
+        type="number"
+        [(ngModel)]="gstPercent">
+
+      <button (click)="calculateGST()">
+        Calculate GST
+      </button>
+
+      <div class="result" *ngIf="gstAmount > 0">
+        <p><strong>GST Amount:</strong> ₹{{ gstAmount | number:'1.2-2' }}</p>
+        <p><strong>Total Amount:</strong> ₹{{ totalAmount | number:'1.2-2' }}</p>
+      </div>
+
+    </div>
+
+    <!-- EMI -->
+    <div class="card">
+
+      <h2>EMI Calculator</h2>
+
+      <label>Loan Amount</label>
+      <input
+        type="number"
+        [(ngModel)]="loanAmount">
+
+      <label>Interest Rate (%)</label>
+      <input
+        type="number"
+        [(ngModel)]="interestRate">
+
+      <label>Tenure (Years)</label>
+      <input
+        type="number"
+        [(ngModel)]="tenure">
+
+      <button (click)="calculateEMI()">
+        Calculate EMI
+      </button>
+
+      <div class="result" *ngIf="emi > 0">
+
+        <p>
+          <strong>Monthly EMI:</strong>
+          ₹{{ emi | number:'1.2-2' }}
+        </p>
+
+        <p>
+          <strong>Total Interest:</strong>
+          ₹{{ totalInterest | number:'1.2-2' }}
+        </p>
+
+        <p>
+          <strong>Total Payment:</strong>
+          ₹{{ totalPayment | number:'1.2-2' }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
