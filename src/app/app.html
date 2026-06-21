@@ -10,10 +10,27 @@
 
   <h1>GST & EMI Calculator</h1>
 
+  <div class="toggle-container">
+
+  <button
+    class="toggle-btn"
+    [class.active]="selectedCalculator === 'gst'"
+    (click)="showCalculator('gst')">
+    GST Calculator
+  </button>
+
+  <button
+    class="toggle-btn"
+    [class.active]="selectedCalculator === 'emi'"
+    (click)="showCalculator('emi')">
+    EMI Calculator
+  </button>
+
+</div>
   <div class="grid">
 
     <!-- GST -->
-    <div class="card">
+    <div class="card" *ngIf="selectedCalculator === 'gst'">
 
       <h2>GST Calculator</h2>
 
@@ -36,11 +53,14 @@
         <p><strong>GST Amount:</strong> ₹{{ gstAmount | number:'1.2-2' }}</p>
         <p><strong>Total Amount:</strong> ₹{{ totalAmount | number:'1.2-2' }}</p>
       </div>
-
+      <div class="chart-container" *ngIf="gstAmount > 0">
+        <canvas id="emiPieChart"></canvas>
+      </div>
+      
     </div>
 
     <!-- EMI -->
-    <div class="card">
+    <div class="card" *ngIf="selectedCalculator === 'emi'">
 
       <h2>EMI Calculator</h2>
 
@@ -62,7 +82,7 @@
       <button (click)="calculateEMI()">
         Calculate EMI
       </button>
-
+      
       <div class="result" *ngIf="emi > 0">
 
         <p>
@@ -81,7 +101,9 @@
         </p>
 
       </div>
-
+      <div class="chart-container" *ngIf="emi > 0">
+        <canvas id="emiPieChart"></canvas>
+      </div>
     </div>
 
   </div>
@@ -89,3 +111,4 @@
 </div>
 
 </div>
+
